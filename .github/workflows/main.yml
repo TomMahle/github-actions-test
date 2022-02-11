@@ -19,12 +19,10 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            if (steps.check.outputs.triggered == 'true') {
-              return
-            }
             await github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Review App Created! You can access it at https://shopper-broker-'
             })
+          if: steps.check.outputs.triggered == 'true'

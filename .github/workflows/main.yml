@@ -1,0 +1,30 @@
+
+name: Respond to Review App Comment
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  issue_comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: khan/pull-request-comment-trigger@1.0.0
+        id: check
+        with:
+          trigger: "/reviewapp"
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            if (steps.check.outputs.triggered == 'true') {
+              return
+            }
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Review App Created! You can access it at https://shopper-broker-'
+            })

@@ -43,7 +43,7 @@ jobs:
             
             You should see a modal like this indicating that the app is using this review environment.
             
-            ![](https://imgur.com/a/1gLLH8i.png)
+            ![Screen Shot 2022-10-31 at 10 53 07 AM](https://user-images.githubusercontent.com/5176244/199072889-52ca29a0-352b-426a-a1b2-85975ce26454.png)
 
             :warning: Having the production version of the app installed may result in it opening and not accessing the review app, in which case the modal will not show.
             :warning: As always, any device accessing a review app must be within our VPN. Find VPN instructions [here](https://shipt.service-now.com/sp?id=kb_article_view&sys_kb_id=c3a1c05387ef4950a620bbbf8bbb359c). Or connect your device by accessing https://vpn.shipt.com`

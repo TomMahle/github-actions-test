@@ -1,4 +1,6 @@
 
+
+
 name: Respond to Review App Comment
 on:
   issue_comment:
@@ -31,7 +33,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: ':rocket: Review App Created!
+              body: `:rocket: Review App Created!
             :runner: Once built, you can access the review app at 
             https://shopper-broker-${{ steps.get-issue-number.outputs.result }}.us-central1.shipt.dev
 
@@ -44,6 +46,6 @@ jobs:
             ![](https://imgur.com/a/1gLLH8i.png)
 
             :warning: Having the production version of the app installed may result in it opening and not accessing the review app, in which case the modal will not show.
-            :warning: As always, any device accessing a review app must be within our VPN. Find VPN instructions [here](https://shipt.service-now.com/sp?id=kb_article_view&sys_kb_id=c3a1c05387ef4950a620bbbf8bbb359c). Or connect your device by accessing https://vpn.shipt.com'
+            :warning: As always, any device accessing a review app must be within our VPN. Find VPN instructions [here](https://shipt.service-now.com/sp?id=kb_article_view&sys_kb_id=c3a1c05387ef4950a620bbbf8bbb359c). Or connect your device by accessing https://vpn.shipt.com`
             })
         if: steps.check.outputs.triggered == 'true'

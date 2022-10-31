@@ -16,6 +16,14 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       - uses: actions/github-script@v5
+        id: get-issue-number
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            return context.issue.number
+          result-encoding: string
+        if: steps.check.outputs.triggered == 'true'
+      - uses: actions/github-script@v5
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
@@ -23,6 +31,19 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Review App Created! You can access it at https://shopper-broker-'  + context.issue.number + '.shipt.dev'
+              body: ':rocket: Review App Created!
+            :runner: Once built, you can access the review app at 
+            https://shopper-broker-${{ steps.get-issue-number.outputs.result }}.us-central1.shipt.dev
+
+            :shopping_cart: If you'd like to see how these changes will impact our gig workers you can [install the staging app](https://techhub.shipt.com/new-in-town/onboarding/shopper/shopper-mobile/staging-access/), make sure it is closed, then use this link to open it:
+            
+            https://staging-shopper.shipt.com/broker-review/?pr=${{ steps.get-issue-number.outputs.result }}
+            
+            You should see a modal like this indicating that the app is using this review environment.
+            
+            ![](https://imgur.com/a/1gLLH8i.png)
+
+            :warning: Having the production version of the app installed may result in it opening and not accessing the review app, in which case the modal will not show.
+            :warning: As always, any device accessing a review app must be within our VPN. Find VPN instructions [here](https://shipt.service-now.com/sp?id=kb_article_view&sys_kb_id=c3a1c05387ef4950a620bbbf8bbb359c). Or connect your device by accessing https://vpn.shipt.com'
             })
-          if: steps.check.outputs.triggered == 'true'
+        if: steps.check.outputs.triggered == 'true'
